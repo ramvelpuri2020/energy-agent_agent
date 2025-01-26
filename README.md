@@ -1,69 +1,87 @@
-# Welcome to your Lovable project
+# EnergySwap 
 
-## Project info
+EnergySwap is a decentralized application (dApp) that optimizes energy usage and facilitates peer-to-peer energy trading. It leverages AI and blockchain technology to empower users to monitor, predict, and optimize their energy consumption while enabling them to trade excess energy using Solana wallets.
 
-**URL**: https://lovable.dev/projects/62891551-e0fd-4795-adc3-f9e3a51e669b
+## Features
 
-## How can I edit this code?
+- **AI Energy Management**: 
+  - **Monitoring & Prediction**: Insights and future usage predictions based on historical data.
+  - **Optimization**: Personalized recommendations to enhance energy efficiency and reduce costs.
 
-There are several ways of editing your application.
+- **Decentralized Marketplace**:
+  - **Trade Energy**: List and purchase excess energy with dynamic pricing.
+  - **Localized Trading**: Search and filter offers by location for efficient energy exchange.
 
-**Use Lovable**
+- **Secure Solana Transactions**:
+  - **Wallet Integration**: Fast, secure transactions using Solana wallets.
+  - **Blockchain Security**: Transparent and immutable transaction records.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/62891551-e0fd-4795-adc3-f9e3a51e669b) and start prompting.
+## Backend with FastAPI
 
-Changes made via Lovable will be committed automatically to this repo.
+- **RESTful API**: High-performance API for data management and business logic.
+- **Python-Powered**: Implements AI algorithms and backend operations.
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Node.js**: Required for the frontend.
+- **Python**: Version 3.7 or higher for the backend.
+- **Solana Wallet**: Install a wallet extension like Phantom.
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+#### Frontend
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Gaurav-612/energy-agent_agent.git
+   cd energy-agent_agent/
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+3. **Start the Frontend**:
+   ```bash
+   npm start
+   ```
 
-**Edit a file directly in GitHub**
+#### Backend
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. **Navigate to Backend Directory**:
+   ```bash
+   cd .backend
+   ```
 
-**Use GitHub Codespaces**
+2. **Create a Virtual Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+3. **Install Python Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## What technologies are used for this project?
+4. **Start the Backend**:
+   ```bash
+   uvicorn main:app --reload
+   ```
 
-This project is built with .
+### Usage
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Connect Wallet**: Link your Solana wallet.
+- **Explore Marketplace**: Browse or create energy listings.
+- **Execute Trades**: Buy or sell energy using your wallet.
 
-## How can I deploy this project?
+## Contributing
 
-Simply open [Lovable](https://lovable.dev/projects/62891551-e0fd-4795-adc3-f9e3a51e669b) and click on Share -> Publish.
+Contributions are welcome. Please fork the repository and submit a pull request.
 
-## I want to use a custom domain - is that possible?
+## License
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
