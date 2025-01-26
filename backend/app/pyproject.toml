@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "hackathon"
+version = "0.1.0"
+description = ""
+authors = ["Gaurav <gaurav@limbik.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+streamlit = "^1.41.1"
+pandas = "^2.2.3"
+numpy = "^2.2.2"
+plotly = "^5.24.1"
+scikit-learn = "^1.6.1"
+fastapi = "^0.115.7"
+uvicorn = "^0.34.0"
+pydantic = "^2.10.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
