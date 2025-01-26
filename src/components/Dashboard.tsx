@@ -1,6 +1,7 @@
 import { EnergyChart } from './EnergyChart';
 import { TradePanel } from './TradePanel';
 import { AIRecommendations } from './AIRecommendations';
+import { PredictedUsage } from './PredictedUsage';
 import { generateMockEnergyData, mockTradeOffers } from '@/lib/mockData';
 
 export const Dashboard = () => {
@@ -21,6 +22,10 @@ export const Dashboard = () => {
           <h3 className="text-lg font-semibold mb-4">Current Consumption</h3>
           <p className="text-4xl font-bold text-secondary">{currentConsumption.toFixed(2)} kWh</p>
         </div>
+      </div>
+
+      <div className="mb-8">
+        <PredictedUsage />
       </div>
 
       <div className="mb-8">
