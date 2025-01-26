@@ -29,7 +29,8 @@ export const generateMockEnergyData = (): EnergyData[] => {
 };
 
 export const mockTradeOffers: TradeOffer[] = [
-  { id: '1', userId: 'user1', amount: 5, price: 0.12, type: 'sell' },
-  { id: '2', userId: 'user2', amount: 3, price: 0.11, type: 'buy' },
-  { id: '3', userId: 'user3', amount: 2, price: 0.13, type: 'sell' },
+  { id: '1', userId: 'user1', amount: 5.0, price: 0.12, type: 'sell' },
+  { id: '2', userId: 'user2', amount: 3.0, price: 0.11, type: 'buy' },
+  { id: '3', userId: 'user3', amount: 2.0, price: 0.13, type: 'sell' },
+  { id: '4', userId: 'user4', amount: 4.0, price: 0.10, type: 'buy' },
 ];
