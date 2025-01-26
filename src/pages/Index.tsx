@@ -32,13 +32,13 @@ const Index = () => {
           <div className="space-y-6">
             <h2 className="text-6xl font-bold text-gray-900 leading-tight">
               <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                Smart Energy
+                Trade Energy
               </span>
               <br />
-              Management
+              with Your Community
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Join our innovative platform to monitor and optimize your energy usage.
+              Join our innovative platform to buy and sell renewable energy directly with your neighbors.
               Save money while supporting sustainable energy practices.
             </p>
           </div>
@@ -57,11 +57,24 @@ const Index = () => {
               size="lg"
               className="text-lg px-8 py-6 h-auto hover:bg-green-50"
             >
-              Learn More
+              Browse Marketplace
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mt-24">
+          <div className="grid md:grid-cols-3 gap-8 mt-24">
+            <div className="p-8 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="h-12 w-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg mb-6 mx-auto flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                Trade Locally
+              </h3>
+              <p className="text-gray-600">
+                Connect with energy producers and consumers in your neighborhood for efficient energy sharing.
+              </p>
+            </div>
             <div className="p-8 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="h-12 w-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg mb-6 mx-auto flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,10 +82,10 @@ const Index = () => {
                 </svg>
               </div>
               <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                AI-Powered Insights
+                AI-Powered
               </h3>
               <p className="text-gray-600">
-                Get intelligent recommendations for optimal energy usage based on your consumption patterns.
+                Get intelligent recommendations for optimal energy trading based on your usage patterns.
               </p>
             </div>
             <div className="p-8 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
