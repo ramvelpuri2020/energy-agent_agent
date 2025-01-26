@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowUp, ArrowDown, Battery, Cloud, Thermometer } from 'lucide-react';
-import { predictEnergyStatus } from '@/lib/energyPrediction';
+import { fetchPredictions } from '../services/energyService';
 import { useEffect, useState } from 'react';
 
 interface PredictionData {
@@ -11,8 +11,9 @@ interface PredictionData {
   surplus: number;
   batteryLevel: number;
   recommendations: string[];
-  weather: {
+  weather_data: {
     temperature: number;
+    cloud_cover: number;
     condition: string;
   };
 }
@@ -25,23 +26,48 @@ export const PredictedUsage = () => {
     surplus: 0,
     batteryLevel: 0,
     recommendations: [],
-    weather: { temperature: 0, condition: '' }
+    weather_data: { temperature: -5, cloud_cover: 20, condition: 'Windy' }
   });
-  
+
   useEffect(() => {
-    const result = predictEnergyStatus();
-    setPrediction({
-      predictedUsage: result.snapshot.consumption,
-      predictedGeneration: result.snapshot.production,
-      surplus: result.snapshot.netEnergy,
-      batteryLevel: result.snapshot.batteryLevel,
-      recommendations: result.recommendations,
-      weather: {
-        temperature: result.snapshot.weather.temperature,
-        condition: result.snapshot.weather.condition
+    const fetchData = async () => {
+      try {
+        const predictionData = await fetchPredictions();
+        console.log('Fetched Prediction Data:', predictionData);
+
+        const userSurveyData = JSON.parse(localStorage.getItem('userSurvey') || '{}');
+        console.log('User Survey Data:', userSurveyData);
+
+        const newPrediction = {
+          predictedUsage: predictionData.averageConsumption,
+          predictedGeneration: predictionData.averageProduction,
+          surplus: predictionData.averageProduction - predictionData.averageConsumption || 0,
+          batteryLevel: userSurveyData.batteryLevel || 0,
+          recommendations: userSurveyData.recommendations || [],
+          weather_data: {
+            temperature: userSurveyData.weather?.temperature || 0,
+            cloud_cover: userSurveyData.weather?.cloud_cover || 0,
+            condition: userSurveyData.weather?.condition || 'Unknown'
+          }
+        };
+
+        console.log('Setting New Prediction:', newPrediction);
+        setPrediction(newPrediction);
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: "Failed to fetch prediction data",
+          variant: "destructive"
+        });
       }
-    });
+    };
+
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log('Updated Prediction State:', prediction);
+  }, [prediction]);
 
   const handleCreateListing = () => {
     toast({
@@ -58,11 +84,11 @@ export const PredictedUsage = () => {
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center gap-1">
               <Thermometer className="w-4 h-4" />
-              {prediction.weather.temperature}°C
+              {prediction.weather_data.temperature}°C
             </div>
             <div className="flex items-center gap-1">
               <Cloud className="w-4 h-4" />
-              {prediction.weather.condition}
+              {prediction.weather_data.condition}
             </div>
             <div className="flex items-center gap-1">
               <Battery className="w-4 h-4" />
@@ -109,9 +135,9 @@ export const PredictedUsage = () => {
               List {prediction.surplus.toFixed(2)} kWh
             </Button>
           ) : (
-            <Button onClick={() => window.location.href = '/marketplace'}>
-              Find Sellers
-            </Button>
+            <Button onClick={() => window.location.href = prediction.surplus > 0 ? '/buyers' : '/marketplace'}>
+            {prediction.surplus > 0 ? `Find Buyers` : `Find Sellers`}
+          </Button>
           )}
         </div>
 
