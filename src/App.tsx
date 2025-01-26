@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import SignIn from "./pages/SignIn";
 import { Dashboard } from "./components/Dashboard";
 import { Marketplace } from "./components/Marketplace";
+import { UserSurvey } from "./components/UserSurvey";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/survey" element={<UserSurvey />} />
             <Route
               path="/dashboard"
               element={
