@@ -6,6 +6,7 @@ import { useToast } from './ui/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { submitReading } from '../services/energyService'; // Import the submitReading function
 
 export const UserSurvey = () => {
   const navigate = useNavigate();
@@ -19,15 +20,43 @@ export const UserSurvey = () => {
     primaryUseTime: 'morning',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would be saved to a backend
-    localStorage.setItem('userSurvey', JSON.stringify(formData));
-    toast({
-      title: "Survey Completed",
-      description: "Welcome to EnergySwap! Your profile has been created.",
-    });
-    navigate('/dashboard');
+    try {
+      // Create a reading object
+      const reading = {
+        timestamp: new Date(),
+        production: parseFloat(formData.averageConsumption), // Example value
+        consumption: parseFloat(formData.averageConsumption), // Example value
+        battery_level: 10.0, // Example value
+        weather_data: {
+          temperature: 25, // Example value
+          cloud_cover: 0.2, // Example value
+          condition: 'clear', // Example value
+        },
+      };
+
+      // Submit the reading
+      await submitReading(reading);
+
+      //store formData in local storage
+      localStorage.setItem('userSurvey', JSON.stringify(formData));
+      
+      // Provide feedback to the user
+      toast({
+        title: "Survey Completed",
+        description: "Welcome to EnergySwap! Your profile has been created.",
+      });
+
+      // Navigate to the dashboard
+      navigate('/dashboard');
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to submit reading data",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
