@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import Index from "./pages/Index";
+import SignIn from "./pages/SignIn";
 import { Dashboard } from "./components/Dashboard";
 import { Marketplace } from "./components/Marketplace";
 
@@ -17,11 +18,27 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="min-h-screen bg-gray-50">
-          <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route
+              path="/dashboard"
+              element={
+                <>
+                  <Navigation />
+                  <Dashboard />
+                </>
+              }
+            />
+            <Route
+              path="/marketplace"
+              element={
+                <>
+                  <Navigation />
+                  <Marketplace />
+                </>
+              }
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
