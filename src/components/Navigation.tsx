@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { WalletConnectButton } from '@/components/ui/WalletConnectButton';
 
 export const Navigation = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ export const Navigation = () => {
               {tab.name}
             </Link>
           ))}
+          <WalletConnectButton />
         </nav>
       </div>
     </div>

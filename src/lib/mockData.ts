@@ -9,7 +9,8 @@ export interface TradeOffer {
   userId: string;
   amount: number;
   price: number;
-  type: 'buy' | 'sell';
+  type: 'buyer' | 'seller';
+  sellerPublicKey: string; // Public key of the seller
   location?: string;
 }
 
@@ -30,8 +31,40 @@ export const generateMockEnergyData = (): EnergyData[] => {
 };
 
 export const mockTradeOffers: TradeOffer[] = [
-  { id: '1', userId: 'user1', amount: 5.0, price: 0.12, type: 'sell', location: 'San Francisco, CA' },
-  { id: '2', userId: 'user2', amount: 3.0, price: 0.11, type: 'buy', location: 'Oakland, CA' },
-  { id: '3', userId: 'user3', amount: 2.0, price: 0.13, type: 'sell', location: 'Berkeley, CA' },
-  { id: '4', userId: 'user4', amount: 4.0, price: 0.10, type: 'buy', location: 'San Jose, CA' },
+  {
+    id: '1',
+    amount: 1.0,
+    price: 0.012,
+    type: 'seller',
+    sellerPublicKey: 'BG8fEjZzWo95B7fvAFjxwfAXpG8naifUkigT5nv8Vg8e', // Example public key
+    location: 'San Francisco, CA',
+    userId: ""
+  },
+  {
+    id: '2',
+    amount: 2.0,
+    price: 0.011,
+    type: 'buyer',
+    sellerPublicKey: 'BG8fEjZzWo95B7fvAFjxwfAXpG8naifUkigT5nv8Vg8e', // Example public key
+    location: 'Oakland, CA',
+    userId: ""
+  },
+  {
+    id: '3',
+    amount: 2.0,
+    price: 0.013,
+    type: 'seller',
+    sellerPublicKey: 'BG8fEjZzWo95B7fvAFjxwfAXpG8naifUkigT5nv8Vg8e', // Example public key
+    location: 'Berkeley, CA',
+    userId: ""
+  },
+  {
+    id: '4',
+    amount: 1.0,
+    price: 0.010,
+    type: 'buyer',
+    sellerPublicKey: 'BG8fEjZzWo95B7fvAFjxwfAXpG8naifUkigT5nv8Vg8e', // Example public key
+    location: 'San Jose, CA',
+    userId: ""
+  },
 ];

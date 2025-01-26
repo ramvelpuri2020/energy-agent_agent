@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { useToast } from './ui/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Search } from 'lucide-react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
+
 
 export const Marketplace = () => {
   const [amount, setAmount] = useState('');
@@ -13,6 +16,7 @@ export const Marketplace = () => {
   const [location, setLocation] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const { toast } = useToast();
+  const { publicKey, sendTransaction } = useWallet();
 
   const handleCreateListing = () => {
     if (!amount || !price) {
@@ -38,6 +42,47 @@ export const Marketplace = () => {
     offer.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     offer.type.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleBuyEnergy = async () => {
+    if (!publicKey) {
+      toast({
+        title: "Wallet Not Connected",
+        description: "Please connect your wallet to proceed.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const connection = new Connection('https://api.devnet.solana.com', 'confirmed');
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: new PublicKey('RECEIVER_PUBLIC_KEY'), // Replace with the seller's public key
+          lamports: parseInt(amount) * LAMPORTS_PER_SOL, // Convert SOL to lamports
+        })
+      );
+
+      const signature = await sendTransaction(transaction, connection);
+      await connection.confirmTransaction(signature, 'confirmed');
+
+      toast({
+        title: "Transaction Successful",
+        description: `You have purchased ${amount} kWh of energy.`,
+      });
+
+      setAmount('');
+      setPrice('');
+    } catch (error) {
+      console.error('Transaction failed:', error);
+      toast({
+        title: "Transaction Failed",
+        description: "There was an error processing your transaction.",
+        variant: "destructive"
+      });
+    }
+  };
+
 
   return (
     <div className="container mx-auto py-8 animate-fade-in">
